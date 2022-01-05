@@ -4,10 +4,14 @@ let result = $("#result");
 
 // autres variables globales
 let sums = [];
+let points = 0;
+const NUM_OPS = 5;
 
 function start_game() {
 
-  create_operation();
+  for (let i=0; i<NUM_OPS; i++) {
+    create_operation();
+  }
 
   // bouton de validation
   let btn = $("<button>Corriger</button>");
@@ -26,6 +30,7 @@ function create_operation() {
     `
       <span>${operand1}</span> + <span>${operand2}</span> = 
       <input type="text" class="game">
+      <span class="correction"></span>
     `
   );
 
@@ -34,15 +39,26 @@ function create_operation() {
 
 function check() {
   let inputs = $(".game");
+  let spans = $(".correction");
 
   // itération sur la collection d'élements jQuery par la méthode .each
-  inputs.each(() => {
+  inputs.each((i) => {
     
-    let answer = parseInt(inputs[0].value);
+    let answer = parseInt(inputs[i].value);
+    spans[i].innerText = sums[i];
 
     // vérification de la réponse
+    if (answer == sums[i]) {
+      points++;
+      spans[i].style.color = "green";
+    } else {
+      spans[i].style.color = "red";
+    }
   
   })
+
+  // affichage des points
+  result.text(points + "/" + NUM_OPS);
 
 }
 

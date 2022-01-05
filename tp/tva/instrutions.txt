@@ -1,0 +1,3 @@
+*** TP: tva ***
+Ecrire un script JS permettant d'afficher un prix TTC et une tva
+à partir d'un montant saisi HT
